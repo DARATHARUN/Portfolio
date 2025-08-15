@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dara Tharun | Portfolio</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #031b4e;
+      --secondary: #00c3ff;
+      --accent: #e6e9f0;
+      --dark: #192133;
+      --light: #f8fafb;
+      --nav-bg: rgba(10,21,60,0.93);
+    }
+    body { margin:0; font-family:'Poppins',sans-serif; background:var(--light); color:var(--dark); scroll-behavior:smooth;}
+    a { color: var(--secondary); text-decoration: none; transition: color .25s;}
+    nav {
+      background: var(--nav-bg);
+      color: #fff; position: fixed; width:100vw; top:0; left:0; z-index: 110;
+      display:flex;justify-content:space-between;align-items:center;padding:7px 4vw 7px 4vw;box-shadow:0 1px 12px rgba(0,0,0,.06);
+      height: 58px;
+    }
+    .logo {font-size:1.8rem;font-weight:700;letter-spacing:1px;color:#fff;}
+    .nav-links {display:flex;gap:30px;}
+    nav a { color: #fff; padding-bottom:2px; border-bottom:2.5px solid transparent; font-weight:500;letter-spacing:0.04em;}
+    nav a.active,nav a:hover { color: var(--secondary); border-color: var(--secondary);}
+    .theme-toggle {font-size:1.3rem; cursor:pointer; margin-left:22px;color:#fff;transition:.25s;}
+    .hero {min-height: 100vh;padding-top:65px;background:#171a2d;position:relative;display:flex;align-items:center;justify-content:center;}
+    #vanta-bg {position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
+    .hero-inner {z-index:1;display:flex;align-items:center;width:92vw;max-width:1250px;justify-content:space-between;}
+    .hero-copy {flex:1;}
+    .hero-img {flex:1;display:flex;justify-content:flex-end;align-items:center;}
+    .hero-copy h1 {font-size:2.8rem; color:#fff;text-shadow:0 3px 32px #008cff55; margin-bottom: 6px;}
+    .hero-copy span#typed { color: var(--secondary); font-weight: 700;}
+    .hero-copy p {font-size:1.10rem; color:#e0e7ef; margin-bottom:27px;line-height:1.9;}
+    .hero-copy .buttons {display:flex;gap:17px;}
+    .hero-copy .btn, .project .btn {
+      background: linear-gradient(90deg,#00c3ff 40%,#005bea 100%);
+      color: #fff; font-weight:600; padding:13px 34px; border-radius:28px; font-size:1.13rem; border:0;cursor:pointer;
+      box-shadow:0 4px 22px rgba(0,123,255,.14); transition:.25s;font-family:'Poppins',sans-serif;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .hero-copy .btn:hover {background:linear-gradient(90deg,#005bea,#00c3ff);}
+    .social-row a { font-size:1.65rem;margin:0 12px 0 0; display:inline-block;color:#fff;transition:.22s;}
+    .social-row a:hover {color:var(--secondary); transform:scale(1.165);}
+    .hero-img img {width: 385px;height: 435px;object-fit:cover;border-radius:46px 0 52px 46px;border:7px solid #fff;box-shadow:0 8px 40px rgba(0,0,0,.13);}
+    @media(max-width:1100px) { .hero-inner {flex-direction:column-reverse;gap:42px;align-items:center;}
+      .hero-img img{width:56vw;max-width:340px;height:320px;}}
+    @media(max-width:700px) {.hero-img img{width:94vw;height:185px}.hero-copy h1{font-size:1.66rem;}}
+    section {
+      background: var(--accent);
+      padding: 43px 6vw 47px 6vw; margin:38px auto 50px auto;
+      max-width:950px; border-radius:14px; box-shadow:0 3.5px 22px rgba(0,0,0,0.09);
+      opacity: 0; transform: translateY(40px); transition: opacity 1.05s, transform 0.95s;
+      position:relative;
+    }
+    section.visible {opacity:1;transform:translateY(0);}
+    h2 {color:var(--primary);font-size:1.45rem;margin-bottom:20px; border-bottom:2px solid #b8e1ff;padding-bottom:6px;}
+    /* Timeline / Education */
+    .timeline {border-left: 5px solid var(--secondary); padding-left: 24px;}
+    .timeline-item {margin-bottom: 30px; }
+    .timeline-title {font-weight:700;color:var(--primary);}
+    .timeline-info {font-size:.98rem; color:#095579; margin:3px 0 2px;}
+    .timeline-desc {color:#222; margin-bottom:3px;}
+    @media(max-width:700px) {.timeline{padding-left:7px;border-left:3px solid var(--secondary);}}
+    /* Certificates */
+    .certificates-grid {display:flex;flex-wrap:wrap;gap:20px;}
+    .certificate-card {
+      background: #fff;
+      padding: 15px 21px 15px 21px;
+      border-radius: 13px;
+      box-shadow: 0 4px 15px #00c3ff12;
+      min-width: 205px; max-width:290px;
+      margin: 9px 0; font-size:1rem; color:#1f4b70;
+      position:relative;transition:.17s;
+      border-left: 5px solid var(--secondary);
+    }
+    .certificate-card strong{display:block; color:var(--primary);margin-bottom:2px;font-weight:700;}
+    .certificate-card:hover{transform:scale(1.04) rotate(-2deg);box-shadow:0 15px 45px #00c3ff28;}
+    /* skills */
+    .skills-list {display:flex;flex-wrap:wrap;gap:16px;}
+    .skill-bar-container{background:#eaf6fc;width:180px;border-radius:19px;overflow:hidden;margin:8px 8px 0 0;}
+    .skill-bar-label{font-weight:500;margin:6px 0 3px 8px;font-size:1rem;color:#034b85;}
+    .skill-bar{height:16px;transition:width 1.1s;background:linear-gradient(90deg, #00b4d8 37%,#005bea 100%);}
+    @media (max-width:800px) {.skills-list{flex-direction:column;}
+      .certificates-grid{flex-direction:column;}}
+    /* Contact */
+    .contact-form {display:flex;flex-direction:column;gap:13px;}
+    .contact-form input,.contact-form textarea{
+      padding:12px; border:1.5px solid #c4e5ff; border-radius:12px; font-size:1rem; resize:none;}
+    .contact-form button{margin-top:7px;}
+    .contact-success{color:green;font-weight:600;font-size:1.07rem; margin-top:8px;}
+    footer {background:var(--primary);color:#fff;text-align:center;padding:15px;margin-top:25px;font-size:1.02rem;}
+    body.dark { background:#0c1222; color:#e0eafc;}
+    body.dark section,body.dark .certificate-card{ background:#181f36; color:#e0eafc;}
+    body.dark h2,body.dark .timeline-title{color:#19a2ff;}
+    body.dark nav,body.dark footer{background:#09122c;}
+    .dark .skill-bar-container{ background:#111943;}
+    .dark .skill-bar-label{color:#23ddff;}
+    .dark .certificate-card{border-color:#0096ff;}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">DaraTharun</div>
+    <div class="nav-links">
+      <a href="#home" class="active">Home</a>
+      <a href="#education">Education</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <span class="theme-toggle" id="themeBtn" title="Toggle Dark Mode"><i class='bx bx-moon'></i></span>
+    </div>
+  </nav>
+  <!-- HERO -->
+  <div class="hero" id="home">
+    <div id="vanta-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Hi, I'm Dara Tharun</h1>
+        <div style="font-size:1.29rem; font-weight:600; color:#19d1ff;margin-bottom:.4em;">
+          <span id="typed"></span>
+        </div>
+        <p>
+          Recent graduate with a strong foundation in IT, programming, and ECE.<br>
+          Passionate about building creative solutions with Python, Java, and electronics.
+        </p>
+        <div class="social-row" style="margin-bottom:17px;">
+          <a href="mailto:tharunrajdara@gmail.com" title="Email"><i class='bx bx-envelope'></i></a>
+          <a href="https://github.com/daratharun" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+          <a href="https://linkedin.com/in/dara-tharun" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+        </div>
+        <div class="buttons">
+          <a href="Resume.pdf" class="btn" download>Download Resume</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="IMG20250508095028.jpg" alt="Dara Tharun" />
+      </div>
+    </div>
+  </div>
+  <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-title">B.Tech in Electronics and Communication Engineering</span>
+        <div class="timeline-info">Narayana Engineering College Gudur &mdash; 2021 – 2025</div>
+        <div class="timeline-desc">Core technical education in electronics, communication systems, and programming.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-title">Intermediate (MPC)</span>
+        <div class="timeline-info">Gurrappa Setti Govt Junior College, Naidupeta &mdash; 2019 – 2021</div>
+        <div class="timeline-desc">Focused on Mathematics, Physics, and Chemistry—foundation for engineering studies.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-title">Secondary Education (SSC)</span>
+        <div class="timeline-info">Vision EM & TM High School, Naidupeta &mdash; 2018 – 2019</div>
+        <div class="timeline-desc">Basic education and introduction to science, math, and computers.</div>
+      </div>
+    </div>
+  </section>
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <h2>Certificates & Courses</h2>
+    <div class="certificates-grid">
+      <div class="certificate-card">
+        <strong>Basics of Python Language</strong>
+        <div>Issued by Cisco</div>
+      </div>
+      <div class="certificate-card">
+        <strong>Basic of SQL</strong>
+        <div>Issued by Simplelearning</div>
+      </div>
+      <div class="certificate-card">
+        <strong>Image Processing (NPTEL)</strong>
+        <div>Jan 2024 – Mar 2024</div>
+        <div>Image filtering, edge detection, histogram equalization, and morphological operations.</div>
+      </div>
+      <div class="certificate-card">
+        <strong>Micro and Nano Fabrications (NPTEL)</strong>
+        <div>Jul 2023 – Oct 2023</div>
+        <div>Fabrication of semiconductors, MEMS, and NEMS devices.</div>
+      </div>
+    </div>
+  </section>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-title">Hand Gesture Recognition to Control LEDs (2025)</span>
+        <div class="timeline-info">Python (OpenCV) + Arduino</div>
+        <div class="timeline-desc">Real-time hand gesture system using webcam, contour and convex hull processing, and serial communication to control LEDs with Arduino.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-title">Student Database Management System (2024)</span>
+        <div class="timeline-info">Python + MySQL</div>
+        <div class="timeline-desc">Database tool for storing and managing student data with add, update, delete, and search features.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-title">Water Level Indicator (2023)</span>
+        <div class="timeline-info">ULN2003 IC Project</div>
+        <div class="timeline-desc">Water level detection circuit with probe sensors and multi-LED display using Darlington transistor array.</div>
+      </div>
+    </div>
+  </section>
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills & Expertise</h2>
+    <div class="skills-list">
+      <div>
+        <div class="skill-bar-label">Python</div>
+        <div class="skill-bar-container"><div class="skill-bar" style="width: 92%;"></div></div>
+      </div>
+      <div>
+        <div class="skill-bar-label">Java</div>
+        <div class="skill-bar-container"><div class="skill-bar" style="width: 84%;"></div></div>
+      </div>
+      <div>
+        <div class="skill-bar-label">HTML</div>
+        <div class="skill-bar-container"><div class="skill-bar" style="width: 86%;"></div></div>
+      </div>
+      <div>
+        <div class="skill-bar-label">CSS</div>
+        <div class="skill-bar-container"><div class="skill-bar" style="width: 85%;"></div></div>
+      </div>
+      <div>
+        <div class="skill-bar-label">SQL</div>
+        <div class="skill-bar-container"><div class="skill-bar" style="width: 82%;"></div></div>
+      </div>
+    </div>
+    <div style="margin-top: 29px;">
+      <strong>Languages:</strong> English, Telugu
+    </div>
+  </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <form class="contact-form" onsubmit="sendMsg(event)">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button class="btn" type="submit">Send Message</button>
+      <div class="contact-success" id="msgSuccess" style="display:none;">Thank you! Your message was sent.</div>
+    </form>
+    <div style="margin-top:23px;">
+      <b>Email:</b> <a href="mailto:tharunrajdara@gmail.com">tharunrajdara@gmail.com</a><br>
+      <b>LinkedIn:</b> <a href="https://linkedin.com/in/dara-tharun" target="_blank">dara-tharun</a><br>
+      <b>GitHub:</b> <a href="https://github.com/daratharun" target="_blank">daratharun</a><br>
+      <b>Location:</b> Tirupathi, Andhra Pradesh, India
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Dara Tharun | Portfolio | NextGen Animated Design</p>
+  </footer>
+  <!-- js libraries: Vanta.js (animated hero), Typed.js (typing effect) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    // Navbar scroll spy
+    const sections = document.querySelectorAll("section, .hero");
+    const navLinks = document.querySelectorAll("nav a");
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 84;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if(link.getAttribute("href") === "#"+current) {
+          link.classList.add("active");
+        }
+      });
+    });
+    // Section animation
+    function animateSections() {
+      const ss = document.querySelectorAll("section");
+      const wb = window.innerHeight + window.scrollY;
+      ss.forEach(section => {
+        const top = section.offsetTop;
+        if(wb > top + 46) {section.classList.add("visible");}
+      });
+    }
+    window.addEventListener("scroll", animateSections);
+    window.addEventListener("load", animateSections);
+    // Vanta.js animated hero
+    VANTA.NET({
+      el: "#vanta-bg",
+      color: 0x009aff,
+      backgroundColor: 0x171a2d,
+      points: 29.00,
+      maxDistance: 22.00,
+      spacing: 14.00,
+      mouseControls: true,
+      touchControls: false,
+      scale: 1.0,
+      scaleMobile: 1.00,
+      showDots: true,
+      speed: 2.1,
+      amplitude: 2.2
+    });
+    // Typed.js - headline
+    new Typed('#typed', {
+      strings: [
+        "Python & Java Developer",
+        "Electronics Enthusiast",
+        "Fast Learner & Innovator"
+      ],
+      typeSpeed: 44,
+      backSpeed: 29,
+      backDelay: 1150,
+      startDelay: 100,
+      smartBackspace: true,
+      showCursor: true,
+      loop: true
+    });
+    // Dark mode
+    document.getElementById("themeBtn").onclick = function() {
+      document.body.classList.toggle("dark");
+      this.innerHTML = document.body.classList.contains("dark")
+        ? "<i class='bx bx-sun'></i>"
+        : "<i class='bx bx-moon'></i>";
+    };
+    // Contact form animation
+    function sendMsg(e){
+      e.preventDefault();
+      document.getElementById('msgSuccess').style.display = 'block';
+      setTimeout(()=>{document.getElementById('msgSuccess').style.display='none';},2600);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
